@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  ecommerce-frontend:
+    build: .
+    container_name: react-ecommerce-web
+    ports:
+      - "3000:80" # Expondrá la aplicación en http://localhost:3000
+    restart: unless-stopped
+    environment:
+      - NODE_ENV=production
