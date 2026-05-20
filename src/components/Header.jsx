@@ -72,12 +72,12 @@ const Header = () => {
                         {user ? (
                             <>
                                 <li>
-                                    <button className="enlace" onClick={() => {
+                                    <Link to="/" onClick={() => {
                                         logout();
                                         navigate('/');
                                     }}>
                                         Cerrar sesión
-                                    </button>
+                                    </Link>
                                 </li>
                             </>
                         ) : (
