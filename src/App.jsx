@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 
@@ -16,35 +17,70 @@ import Inventory from './pages/Inventory';
 import { SearchProvider } from './context/SearchContext';
 
 function App() {
+  const [isWireframe, setIsWireframe] = useState(false);
+
   return (
     <AuthProvider>
       <CartProvider>
         <SearchProvider>
-          <Router>
-            <Header />
-            <Cart />
-            <main>
-              <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="/productos" element={<Products />} />
-                <Route path="/login" element={<Login />} />
+          <div className={isWireframe ? 'wireframe-active' : ''}>
+            <Router>
+              <Header />
+              <Cart />
+              <main>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/productos" element={<Products />} />
+                  <Route path="/login" element={<Login />} />
 
-                <Route path="/pago" element={
-                  <ProtectedRoute>
-                    <Checkout />
-                  </ProtectedRoute>
-                } />
+                  <Route path="/pago" element={
+                    <ProtectedRoute>
+                      <Checkout />
+                    </ProtectedRoute>
+                  } />
 
-                <Route path="/inventario" element={
-                  <ProtectedRoute>
-                    <Inventory />
-                  </ProtectedRoute>
-                } />
+                  <Route path="/inventario" element={
+                    <ProtectedRoute>
+                      <Inventory />
+                    </ProtectedRoute>
+                  } />
 
-              </Routes>
-            </main>
-            <Footer />
-          </Router>
+                </Routes>
+              </main>
+              <Footer />
+
+              {/* Botón Flotante Interactivo: Modo Wireframe */}
+              <button
+                id="wireframe-toggle-btn"
+                onClick={() => setIsWireframe(!isWireframe)}
+                style={{
+                  position: 'fixed',
+                  bottom: '25px',
+                  right: '25px',
+                  zIndex: 99999,
+                  backgroundColor: isWireframe ? '#222222' : '#edb312',
+                  color: isWireframe ? '#ffffff' : '#0a0a0a',
+                  border: isWireframe ? '2px solid #555555' : 'none',
+                  borderRadius: '50px',
+                  padding: '12px 24px',
+                  fontWeight: '800',
+                  fontSize: '12px',
+                  cursor: 'pointer',
+                  boxShadow: '0 4px 20px rgba(0,0,0,0.6)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '10px',
+                  transition: 'all 0.3s ease',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  fontFamily: '"Outfit", sans-serif'
+                }}
+              >
+                <i className={isWireframe ? 'ri-eye-line' : 'ri-layout-line'} style={{ fontSize: '16px' }}></i>
+                <span>{isWireframe ? 'Ver Diseño Real' : 'Modo Wireframe'}</span>
+              </button>
+            </Router>
+          </div>
         </SearchProvider>
       </CartProvider>
     </AuthProvider>
