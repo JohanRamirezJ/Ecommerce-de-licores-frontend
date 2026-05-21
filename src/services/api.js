@@ -4,7 +4,7 @@ class ApiSingleton {
     constructor() {
         if (!ApiSingleton.instance) {
             this.axiosInstance = axios.create({
-                baseURL: 'https://johanramirezj.github.io/cumplea-os-ana-gabriela/',
+                baseURL: 'https://ecommerce-de-licores-backend.onrender.com',
             });
             ApiSingleton.instance = this;
         }
