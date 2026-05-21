@@ -5,7 +5,7 @@ class ApiSingleton {
         if (!ApiSingleton.instance) {
             this.axiosInstance = axios.create({
 
-                baseURL: import.meta.env.VITE_API_URL ,
+                baseURL: 'https://ecommerce-de-licores-backend.onrender.com' ,
 
             });
             ApiSingleton.instance = this;
