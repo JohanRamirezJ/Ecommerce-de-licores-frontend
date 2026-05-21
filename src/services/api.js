@@ -4,7 +4,7 @@ class ApiSingleton {
     constructor() {
         if (!ApiSingleton.instance) {
             this.axiosInstance = axios.create({
-                baseURL: 'http://localhost:8080',
+                baseURL: 'https://johanramirezj.github.io/cumplea-os-ana-gabriela/',
             });
             ApiSingleton.instance = this;
         }
